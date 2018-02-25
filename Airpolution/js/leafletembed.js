@@ -16,9 +16,22 @@ var madridjson1 = {"type":"FeatureCollection","features":[{"type":"Feature","pro
 
 
 
-L.geoJSON(madridjson1,).addTo(map);
-window.setTimeout(1000);
-console.log("123");
-madridjson1.remove(map);
-console.log("ok");
+L.geoJSON(madridjson1).addTo(map);
+console.log("halllo");
+
+function onMapClick(e)
+{
+    console.log("click");
+     var coords= precisionRound(e.latlng.lat,3) + ", " + precisionRound(e.latlng.lng,3);
+    document.getElementById('home').innerHTML ="You are looking for: " + coords +"<br/>" + "<br/>" +  "The average polution was: " + "<br/>" + "in the immediate vicinity(1km) driven" + " " + "vehicles a the last month";
+
+}
+map.on('click',onMapClick);
+
 // FeatureGroup is to store editable layers
+
+// von https://developer.mozilla.org/de/docs/Web/JavaScript/Reference/Global_Objects/Math/round
+function precisionRound(number, precision) {
+    var factor = Math.pow(10, precision);
+    return Math.round(number * factor) / factor;
+}
